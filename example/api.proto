@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package example.users.v1;
+
+option go_package = "github.com/example/users/v1;usersv1";
+
+// Сервис управления пользователями
+service UserService {
+  // Получить пользователя по ID
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+
+  // Создать нового пользователя
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+
+  // Обновить пользователя
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+
+  // Удалить пользователя
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+
+  // Список пользователей с пагинацией
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+}
+
+// Модель пользователя
+message User {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  int32 age = 4;
+  repeated string roles = 5;
+  Address address = 6;
+  Status status = 7;
+}
+
+message Address {
+  string city = 1;
+  string street = 2;
+  string zip_code = 3;
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_ACTIVE = 1;
+  STATUS_INACTIVE = 2;
+  STATUS_BANNED = 3;
+}
+
+// GetUser
+message GetUserRequest {
+  string id = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+// CreateUser
+message CreateUserRequest {
+  string email = 1;
+  string name = 2;
+  int32 age = 3;
+  repeated string roles = 4;
+  Address address = 5;
+}
+
+message CreateUserResponse {
+  User user = 1;
+}
+
+// UpdateUser
+message UpdateUserRequest {
+  string id = 1;
+  optional string email = 2;
+  optional string name = 3;
+  optional int32 age = 4;
+  repeated string roles = 5;
+}
+
+message UpdateUserResponse {
+  User user = 1;
+}
+
+// DeleteUser
+message DeleteUserRequest {
+  string id = 1;
+}
+
+message DeleteUserResponse {
+  bool success = 1;
+}
+
+// ListUsers
+message ListUsersRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  optional Status status_filter = 3;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}

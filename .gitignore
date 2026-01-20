@@ -1,0 +1,26 @@
+# Gradle
+.gradle/
+build/
+gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# IntelliJ Platform Plugin SDK
+.intellijPlatform/
+
+# Kotlin
+*.class
+*.kotlin_module
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local configuration
+local.properties

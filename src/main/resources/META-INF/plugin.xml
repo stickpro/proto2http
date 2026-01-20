@@ -1,0 +1,72 @@
+<idea-plugin>
+    <id>com.github.proto2http</id>
+    <name>Proto to HTTP</name>
+    <vendor email="stick.qwe@gmail.com" url="https://github.com/stickpro/proto2http">Proto2HTTP</vendor>
+
+    <description><![CDATA[
+    Generate .http files from Protocol Buffer (.proto) files for gRPC testing in JetBrains HTTP Client.
+    <br><br>
+    <b>Features:</b>
+    <ul>
+        <li>Generate HTTP requests from proto service definitions</li>
+        <li>Support for imports and Well-Known Types</li>
+        <li>Bulk generation for entire directories</li>
+        <li>Configurable output directory and host settings</li>
+    </ul>
+    <br>
+    <b>Usage:</b>
+    <ul>
+        <li>Right-click on a .proto file → Generate HTTP File</li>
+        <li>Right-click on a folder → Generate HTTP Files (Bulk)</li>
+        <li>Configure settings in Settings → Tools → Proto2HTTP</li>
+    </ul>
+    ]]></description>
+
+    <change-notes><![CDATA[
+    <b>1.0.0</b>
+    <ul>
+        <li>Initial release</li>
+        <li>Generate .http files from .proto files</li>
+        <li>Support for proto imports</li>
+        <li>Support for Google Well-Known Types</li>
+        <li>Bulk generation for directories</li>
+        <li>Configurable settings (host, output directory)</li>
+    </ul>
+    ]]></change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Settings page -->
+        <applicationConfigurable
+            parentId="tools"
+            instance="com.github.proto2http.settings.PluginSettingsConfigurable"
+            id="com.github.proto2http.settings"
+            displayName="Proto2HTTP"/>
+
+        <!-- Persistent settings storage -->
+        <applicationService
+            serviceImplementation="com.github.proto2http.settings.PluginSettings"/>
+    </extensions>
+
+    <actions>
+        <!-- Single file generation -->
+        <action id="Proto2Http.Generate"
+                class="com.github.proto2http.GenerateHttpAction"
+                text="Generate HTTP File"
+                description="Generate .http file from proto for gRPC requests"
+                icon="AllIcons.Nodes.PpWeb">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="EditSource"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+        <!-- Bulk generation for directories -->
+        <action id="Proto2Http.GenerateBulk"
+                class="com.github.proto2http.GenerateHttpBulkAction"
+                text="Generate HTTP Files (Bulk)"
+                description="Generate .http files from all proto files in directory"
+                icon="AllIcons.Nodes.PpWeb">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="Proto2Http.Generate"/>
+        </action>
+    </actions>
+</idea-plugin>

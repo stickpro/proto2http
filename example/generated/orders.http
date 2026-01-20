@@ -1,0 +1,64 @@
+### Generated from: orders.proto
+### Package: example.orders.v1
+
+@host = localhost:50051
+
+###############################################################################
+### OrderService
+### Сервис управления заказами
+###############################################################################
+
+### Получить заказ по ID
+GRPC {{host}}/example.orders.v1.OrderService/GetOrder
+
+{
+  "id": "string"
+}
+
+### Список заказов с пагинацией
+GRPC {{host}}/example.orders.v1.OrderService/ListOrders
+
+{
+  "user_id": "string",
+  "pagination": {
+    "page": 0,
+    "page_size": 0,
+    "total": 0
+  },
+  "sort_order": "SORT_ORDER_ASC"
+}
+
+### Создать заказ
+GRPC {{host}}/example.orders.v1.OrderService/CreateOrder
+
+{
+  "user_id": "string",
+  "items": [{
+    "product_id": "string",
+    "quantity": 0,
+    "price": 0.0
+  }]
+}
+
+### Обновить заказ (с поддержкой FieldMask)
+GRPC {{host}}/example.orders.v1.OrderService/UpdateOrder
+
+{
+  "id": "string",
+  "order": {
+    "id": "string",
+    "user_id": "string",
+    "items": [{
+      "product_id": "string",
+      "quantity": 0,
+      "price": 0.0
+    }],
+    "status": "ORDER_STATUS_PENDING",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "total_price": 0.0,
+    "estimated_delivery": "3600s",
+    "tracking_number": "string"
+  },
+  "update_mask": "field1,field2"
+}

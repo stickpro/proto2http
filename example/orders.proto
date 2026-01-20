@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package example.orders.v1;
+
+import "common/types.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/wrappers.proto";
+
+// Сервис управления заказами
+service OrderService {
+  // Получить заказ по ID
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+
+  // Список заказов с пагинацией
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
+
+  // Создать заказ
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+
+  // Обновить заказ (с поддержкой FieldMask)
+  rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
+}
+
+message Order {
+  string id = 1;
+  string user_id = 2;
+  repeated OrderItem items = 3;
+  OrderStatus status = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+  double total_price = 7;
+  google.protobuf.Duration estimated_delivery = 8;
+  google.protobuf.StringValue tracking_number = 9;
+}
+
+message OrderItem {
+  string product_id = 1;
+  int32 quantity = 2;
+  double price = 3;
+}
+
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED = 0;
+  ORDER_STATUS_PENDING = 1;
+  ORDER_STATUS_CONFIRMED = 2;
+  ORDER_STATUS_SHIPPED = 3;
+  ORDER_STATUS_DELIVERED = 4;
+  ORDER_STATUS_CANCELLED = 5;
+}
+
+// GetOrder
+message GetOrderRequest {
+  string id = 1;
+}
+
+message GetOrderResponse {
+  Order order = 1;
+}
+
+// ListOrders
+message ListOrdersRequest {
+  string user_id = 1;
+  example.common.Pagination pagination = 2;
+  example.common.SortOrder sort_order = 3;
+}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+  example.common.Pagination pagination = 2;
+}
+
+// CreateOrder
+message CreateOrderRequest {
+  string user_id = 1;
+  repeated OrderItem items = 2;
+}
+
+message CreateOrderResponse {
+  Order order = 1;
+}
+
+// UpdateOrder
+message UpdateOrderRequest {
+  string id = 1;
+  Order order = 2;
+  google.protobuf.FieldMask update_mask = 3;
+}
+
+message UpdateOrderResponse {
+  Order order = 1;
+}

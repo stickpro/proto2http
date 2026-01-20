@@ -1,0 +1,58 @@
+### Generated from: api.proto
+### Package: example.users.v1
+
+@host = localhost:50051
+
+###############################################################################
+### UserService
+### Сервис управления пользователями
+###############################################################################
+
+### Получить пользователя по ID
+GRPC {{host}}/example.users.v1.UserService/GetUser
+
+{
+  "id": "string"
+}
+
+### Создать нового пользователя
+GRPC {{host}}/example.users.v1.UserService/CreateUser
+
+{
+  "email": "string",
+  "name": "string",
+  "age": 0,
+  "roles": ["string"],
+  "address": {
+    "city": "string",
+    "street": "string",
+    "zip_code": "string"
+  }
+}
+
+### Обновить пользователя
+GRPC {{host}}/example.users.v1.UserService/UpdateUser
+
+{
+  "id": "string",
+  "email": "string",
+  "name": "string",
+  "age": 0,
+  "roles": ["string"]
+}
+
+### Удалить пользователя
+GRPC {{host}}/example.users.v1.UserService/DeleteUser
+
+{
+  "id": "string"
+}
+
+### Список пользователей с пагинацией
+GRPC {{host}}/example.users.v1.UserService/ListUsers
+
+{
+  "page_size": 0,
+  "page_token": "string",
+  "status_filter": "STATUS_ACTIVE"
+}
