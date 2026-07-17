@@ -13,7 +13,7 @@ A JetBrains IDE plugin that generates `.http` files from Protocol Buffer (`.prot
 ## Installation
 
 ### From JetBrains Marketplace
-*(Coming soon)*
+Install directly from [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/29843-proto-to-http), or via `Settings` → `Plugins` → `Marketplace` → search for "Proto to HTTP".
 
 ### Manual Installation
 1. Download the latest release from [Releases](../../releases)

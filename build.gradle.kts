@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.github.proto2http"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -44,7 +44,7 @@ intellijPlatform {
 tasks {
     patchPluginXml {
         sinceBuild.set("243")
-        untilBuild.set("253.*")
+        untilBuild.set(provider { null })
     }
 
     signPlugin {

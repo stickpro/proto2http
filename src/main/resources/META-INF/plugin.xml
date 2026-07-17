@@ -20,9 +20,14 @@
         <li>Right-click on a folder → Generate HTTP Files (Bulk)</li>
         <li>Configure settings in Settings → Tools → Proto2HTTP</li>
     </ul>
+    <br>
     ]]></description>
 
     <change-notes><![CDATA[
+    <b>1.0.1</b>
+    <ul>
+        <li>Extended IDE compatibility range (removed upper build restriction)</li>
+    </ul>
     <b>1.0.0</b>
     <ul>
         <li>Initial release</li>
